@@ -45,6 +45,7 @@ app.post('/login', (req, res) => {
         req.session.isAuthenticated = true;
         res.redirect('/hello');
     } else {
+        res.statusCode = 401; //Unauthorized
         res.send('Login failed. Please check your credentials and try again.');
     }
 });
