@@ -1,51 +1,51 @@
 const fs = require('fs');
-const AWS = require('aws-sdk');
+//const AWS = require('aws-sdk');
 const express = require('express');
 const session = require('express-session');
 require('dotenv').config();
 const app = express();
 const port = 3000;
 
-AWS.config.update({
-  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: AWS_REGION,
-});
+// AWS.config.update({
+//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+//   region: AWS_REGION,
+// });
 
-const cloudwatchlogs = new AWS.CloudWatchLogs();
-const logGroupName = 'VSA';
-const logStreamName = 'VSALogs';
+// const cloudwatchlogs = new AWS.CloudWatchLogs();
+// const logGroupName = 'VSA';
+// const logStreamName = 'VSALogs';
 
-cloudwatchlogs.createLogStream({
-  logGroupName: logGroupName,
-  logStreamName: logStreamName,
-}, (err, data) => {
-  if (err) {
-    console.error('Error creating log stream:', err);
-  } else {
-    logData('Log stream created:', data);
-  }
-});
+// cloudwatchlogs.createLogStream({
+//   logGroupName: logGroupName,
+//   logStreamName: logStreamName,
+// }, (err, data) => {
+//   if (err) {
+//     console.error('Error creating log stream:', err);
+//   } else {
+//     logData('Log stream created:', data);
+//   }
+// });
 
-function logData(log){
-    console.log(log);
-    cloudwatchlogs.putLogEvents({
-        logGroupName: logGroupName,
-        logStreamName: logStreamName,
-        logEvents: [
-            {
-                timestamp: new Date().getTime(),
-                message: log,
-            }
-        ]
-    }, (err, data) => {
-    if (err) {
-      console.error('Error sending log events:', err);
-    } else {
-      logData('Log events sent:', data);
-    }
-  });
-}
+// function logData(log){
+//     console.log(log);
+//     cloudwatchlogs.putLogEvents({
+//         logGroupName: logGroupName,
+//         logStreamName: logStreamName,
+//         logEvents: [
+//             {
+//                 timestamp: new Date().getTime(),
+//                 message: log,
+//             }
+//         ]
+//     }, (err, data) => {
+//     if (err) {
+//       console.error('Error sending log events:', err);
+//     } else {
+//       logData('Log events sent:', data);
+//     }
+//   });
+// }
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -86,11 +86,11 @@ app.post('/login', (req, res) => {
 
     if (user) {
         req.session.isAuthenticated = true;
-        logData("User Logged in");
+        //logData("User Logged in");
         res.redirect('/hello');
     } else {
         res.statusCode = 401; //Unauthorized
-        logData("Auth Failed");
+        //logData("Auth Failed");
         res.send('Login failed. Please check your credentials and try again.');
     }
 });
@@ -113,7 +113,7 @@ app.post('/register', (req, res) => {
     users.push({ username, password });
 
     fs.writeFileSync('users.json', JSON.stringify(users));
-    logData("User registered");
+    //logData("User registered");
     res.redirect('/login');
 });
 
@@ -123,5 +123,5 @@ app.get('/hello', isAuthenticated, (req, res) => {
 });
 
 app.listen(port, () => {
-    logData(`Server is running on http://localhost:${port}`);
+    console.log(`Server is running on http://localhost:${port}`);
 });
