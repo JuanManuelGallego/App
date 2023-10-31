@@ -2,14 +2,14 @@ const fs = require('fs');
 const AWS = require('aws-sdk');
 const express = require('express');
 const session = require('express-session');
-
+require('dotenv').config();
 const app = express();
 const port = 3000;
 
 AWS.config.update({
-  accessKeyId: 'AKIASPZMLLSPNTBKFXCD',
-  secretAccessKey: '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',
-  region: 'us-east-1',
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: AWS_REGION,
 });
 
 const cloudwatchlogs = new AWS.CloudWatchLogs();
@@ -58,7 +58,7 @@ if (fs.existsSync('users.json')) {
 
 app.use(
     session({
-        secret: 'your_secret_key',
+        secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: true,
     })
