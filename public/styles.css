@@ -56,3 +56,32 @@ header h1 {
     width: 40px;
     height: auto;
 }
+.carousel {
+    position: relative;
+    width: 600px;
+    height: 400px;
+  }
+  
+  .carousel__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This will ensure that the image is scaled to fit the container while maintaining its aspect ratio */
+  }
+  
+  .carousel__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    width: fit-content;
+  }
+  
+  .carousel__button--left {
+    left: 10px;
+  }
+  
+  .carousel__button--right {
+    right: 10px;
+  }

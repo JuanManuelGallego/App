@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    var images = [
+      "/image/baleine.png?passcode=ILoveBrett",
+      "/image/cachalot.jpg?passcode=ILoveBrett",
+      "/image/glowfish.jpg?passcode=ILoveBrett",
+    ];
+    var currentImageIndex = 0;
+
+    function changeImage(change) {
+      currentImageIndex += change;
+      if (currentImageIndex < 0) {
+        currentImageIndex = images.length - 1;
+      } else if (currentImageIndex === images.length) {
+        currentImageIndex = 0;
+      }
+      document.querySelector(".carousel__image").src =
+        images[currentImageIndex];
+    }
+  </script>
+  <head>
+    <title>Hello World</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <header>
+    <h1><img src="logo.png" class="logo" /> Secure APP inc.</h1>
+  </header>
+  <body>
+    <div class="carousel">
+      <img
+        class="carousel__image"
+        src="/image/baleine.png?passcode=ILoveBrett"
+      />
+      <button
+        class="carousel__button carousel__button--left"
+        onclick="changeImage(-1)"
+      >
+        <
+      </button>
+      <button
+        class="carousel__button carousel__button--right"
+        onclick="changeImage(1)"
+      >
+        >
+      </button>
+    </div>
+  </body>
+</html>
