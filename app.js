@@ -127,7 +127,8 @@ app.get("/hello", isAuthenticated, (req, res) => {
 
 app.get("/image/:imageName", isAuthenticated, (req, res) => {
   let passcode = req.query.passcode;
-  if (passcode != "ILoveBrett") res.status(403).send("Wrong passcode");
+  if (passcode != "ILoveBrett")
+    res.status(403).redirect("/alertealintrusion.html");
   let imageName = req.params.imageName;
   res.sendFile(__dirname + "/images/" + imageName);
 });
