@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login</title>
+    <link rel="icon" type="image/png" href="images/logo.png" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1><img src="logo.png" class="logo" /> Secure APP inc.</h1>
+    </header>
+    <div class="login-container">
+      <h1>Login</h1>
+      <form action="/login" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <button type="submit">Login</button>
+      </form>
+      <div class="register-link">
+        Don't have an account? <a href="/register">Register here</a>
+      </div>
+    </div>
+  </body>
+</html>
