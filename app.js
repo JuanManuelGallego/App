@@ -1,5 +1,4 @@
 const fs = require("fs");
-//const AWS = require('aws-sdk');
 const express = require("express");
 const session = require("express-session");
 require("dotenv").config();
@@ -20,7 +19,6 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { httpOnly: false },
   })
 );
 
